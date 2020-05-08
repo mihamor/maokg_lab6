@@ -6,14 +6,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
-import java.sql.Time;
 import javax.media.j3d.*;
 import javax.swing.*;
 import javax.vecmath.*;
-import com.sun.j3d.loaders.Loader;
-import com.sun.j3d.loaders.Scene;
-import com.sun.j3d.utils.geometry.Box;
-import com.sun.j3d.utils.image.TextureLoader;
+
 import com.sun.j3d.utils.universe.SimpleUniverse;
 
 public class SceneControl implements KeyListener, ActionListener {
@@ -23,14 +19,14 @@ public class SceneControl implements KeyListener, ActionListener {
 
 	private Canvas3D canvas;
 
-	private Goose object;
+	private Mike object;
 
 	public SceneControl() throws IOException {
 		initCanvas();
 		initUniverse();
 		Bounds influenceRegion = new BoundingSphere();
 
-		object = new Goose(canvas);
+		object = new Mike(canvas);
 		root = new BranchGroup();
 
 		root.addChild(object.asNode());
@@ -58,7 +54,7 @@ public class SceneControl implements KeyListener, ActionListener {
 
 	private void addLightsToUniverse(Bounds influenceRegion) {
 		Color3f lightColor = new Color3f(Color.WHITE);
-		Vector3f lightDirection = new Vector3f(-1F, -1F, -1F);
+		Vector3f lightDirection = new Vector3f(-3F, -3F, -3F);
 		DirectionalLight light = new DirectionalLight(lightColor, lightDirection);
 		light.setInfluencingBounds(influenceRegion);
 		root.addChild(light);
@@ -92,7 +88,7 @@ public class SceneControl implements KeyListener, ActionListener {
 		double rotateX = (keyViewUp ? 1 : 0) - (keyViewDown ? 1 : 0);
 		double rotateY = (keyViewLeft ? 1 : 0) - (keyViewRight ? 1 : 0);
 
-		object.rotateModel(rotateX*0.05, rotateY*0.05, 0);
+		// object.rotateModel(rotateX*0.05, rotateY*0.05, 0);
 	}
 
 	private boolean keyLeft, keyRight, keyForward, keyViewLeft, keyViewRight, keyViewUp, keyViewDown;

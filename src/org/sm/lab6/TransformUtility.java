@@ -41,6 +41,7 @@ public class TransformUtility {
 		this.rotY += rotY;
 		this.rotZ += rotZ;
 
+
 		if(this.rotX != 0) rotationTransform.rotX(this.rotX);
 		if(this.rotY != 0) rotationTransform.rotY(this.rotY);
 		if(this.rotZ != 0) rotationTransform.rotZ(this.rotZ);
@@ -48,10 +49,36 @@ public class TransformUtility {
 		rotationGroup.setTransform(rotationTransform);
 	}
 
-	public void setRoration(double rotX, double rotY, double rotZ) {
+	public void rotateMul(double rotX, double rotY, double rotZ) {
+		this.rotX += rotX;
+		this.rotY += rotY;
+		this.rotZ += rotZ;
+
+		Transform3D rotationX = new Transform3D();
+		Transform3D rotationY = new Transform3D();
+		Transform3D rotationZ = new Transform3D();
+
+		if(this.rotX != 0) rotationX.rotX(this.rotX);
+		if(this.rotY != 0) rotationY.rotY(this.rotY);
+		if(this.rotZ != 0) rotationZ.rotZ(this.rotZ);
+
+		rotationZ.mul(rotationX);
+
+		rotationGroup.setTransform(rotationZ);
+	}
+
+
+	public void setRotation(double rotX, double rotY, double rotZ) {
 		this.rotX = rotX;
 		this.rotY = rotY;
 		this.rotZ = rotZ;
+
+
+		if(this.rotX != 0) rotationTransform.rotX(this.rotX);
+		if(this.rotY != 0) rotationTransform.rotY(this.rotY);
+		if(this.rotZ != 0) rotationTransform.rotZ(this.rotZ);
+
+		rotationGroup.setTransform(rotationTransform);
 	}
 
 	public Node asNode() {
